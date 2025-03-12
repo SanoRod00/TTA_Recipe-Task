@@ -59,6 +59,7 @@ const newRecipe = {
 recipes.push(newRecipe)
 
 recipeTitleInput.value = "";
+
 recipeIngredientsInput.value = "";
 recipeStepsInput.value = "";
 
