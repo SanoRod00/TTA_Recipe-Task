@@ -1,4 +1,4 @@
-const recipes = [
+let recipes = [
     {
         title:"Spaghetti Bolognese",
         ingredients: "Spaghetti, Ground Beef, Tomato Sauce, Parmesan Cheese",
@@ -38,7 +38,7 @@ const saveRecipeToLocalStorage = () => {
 }
 
 const loadRecipesFromLocalStorage = () => {
-    const storedRecipes = localStorage.getItem('recipes')
+    const storedRecipes = localStorage.getItem("recipes")
     
     if(storedRecipes){
         recipes = JSON.parse(storedRecipes);
@@ -89,22 +89,19 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
         title: recipeTitle,
         ingredients: recipeIngredients,
         steps: recipeSteps
-    }}
+    }
     recipes.push(newRecipe)
     
     document.getElementById("recipeTitle").value= "";
     
     document.getElementById("recipeIngredients").value= "";
     document.getElementById("recipeSteps").value= "";
+
+    saveRecipeToLocalStorage();
     displayRecipes();  
- }
-    // }
-    // else{
-    //     alert('Please fill all the fields')
-    // }
-
-}
+  }  
+ }    
+}  
 document.getElementById('recipeForm').addEventListener('submit', addRecipe);
-
-
+loadRecipesFromLocalStorage();
 displayRecipes();
