@@ -69,8 +69,9 @@ displayRecipes();
 
 }
 
-const recipeForm = document.getElementById('recipeForm');
-recipeForm.addEventListener('submit', addRecipe)
+// const recipeForm = document.getElementById('recipeForm');
+// recipeForm.addEventListener('submit', addRecipe)
+document.getElementById('recipeForm').addEventListener('submit', addRecipe);
 
 
 displayRecipes();
