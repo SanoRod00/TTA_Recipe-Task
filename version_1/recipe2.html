@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book Application</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header class="p-4 bg-blue-500 text-white text-center">
+        <h1 class="text-2xl">Recipe Book Application</h1>
+    </header>
+    <main class="p-6">
+        <section id="recipeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+           
+        </section>
+         <form id="recipeForm" class="space-y-4">
+
+        <section class="mt-6">
+            <h2 class="text-xl mb-4">Add a new Recipe</h2>
+            <div>
+                <label class="block text-lg font-semibold pb-2">Recipe title</label>
+                <input type="text" id="recipeTitle" class="border p-2 w-full rounded-lg focus:outline-none" placeholder="Enter recipe Title" >
+            </div>
+<div>
+    <label class="block text-lg font-semibold pb-2">Ingredients</label>
+    <textarea id="recipeIngredients" class="border p-2 w-full rounded-lg" placeholder="Enter recipe Ingredients"></textarea>
+</div>
+
+<div>
+    <label class="block text-lg font-semibold pb-2">Steps</label>
+    <textarea id="recipeSteps" class="border p-2 w-full rounded-lg focus:outline-none" placeholder="Enter recipe Steps"></textarea>
+</div>
+<button type="submit"  class="bg-green-500 text-white font-thin text-lg px-2 py-2 mt-4 rounded-lg">Add Recipe</button>
+</form>
+        </section>
+    </main>
+    <footer class="p-4 bg-gray-700 text-white text-center">
+        <p>&copy;2025 Sano's Resto Recipe book App</p>
+    </footer>
+    <script src="./script2.js"></script>
+</body>
+</html>

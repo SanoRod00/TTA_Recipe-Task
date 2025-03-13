@@ -14,7 +14,7 @@ const recipes = [
         ingredients: "Bread, Cheese, Butter",
         steps: "Butter bread, place cheese in between, grill until cheese is melted"
     }
-    // },
+    
     // {
     //     title:"Fried Rice",
     //     ingredients: "Cooked Rice, Scrambled Eggs, Vegetables, Soy Sauce",
@@ -41,16 +41,14 @@ const displayRecipes = () => {
         recipeList.appendChild(recipeCard);
     })
 }
-const addRecipe = () => {
-    const  recipeTitleInput = document.querySelector('#recipeTitle');
-    const  recipeIngredientsInput = document.querySelector('#recipeIngredients');
-    const  recipeStepsInput = document.querySelector('#recipeSteps');
+const addRecipe = (event) => {
+    event.preventDefault();
+    const recipeTitle = document.getElementById("recipeTitle").value;
+    const recipeIngredients = document.getElementById("recipeIngredients").value;
+    const recipeSteps = document.getElementById("recipeSteps").value;
 
-    const recipeTitle = recipeTitleInput.value.trim();
-    const recipeIngredients = recipeIngredientsInput.value.trim();
-    const recipeSteps = recipeStepsInput.value.trim();
+    if(recipeTitle.trim() !== "" && recipeIngredients.trim() !== "" && recipeSteps.trim() !== ""){
 
-    if(recipeTitle.trim() !== "" && recipeIngredients !== "" && recipeSteps.trim() !== ""){
 const newRecipe = {
     title: recipeTitle,
     ingredients: recipeIngredients,
@@ -58,21 +56,21 @@ const newRecipe = {
 }
 recipes.push(newRecipe)
 
-recipeTitleInput.value = "";
+document.getElementById("recipeTitle").value= "";
 
-recipeIngredientsInput.value = "";
-recipeStepsInput.value = "";
+document.getElementById("recipeIngredients").value= "";
+document.getElementById("recipeSteps").value= "";
 
 displayRecipes();
 
+    }else{
+        alert('Please fill all the fields')
     }
-    else{
-        alert('Please all fields are required')
-    }
+
 }
 
-// const addRecipeBtn = document.querySelector('#addRecipeBtn')
-// addRecipeBtn.addEventListener('click' , addRecipe);
+const recipeForm = document.getElementById('recipeForm');
+recipeForm.addEventListener('submit', addRecipe)
 
-document.querySelector("addRecipe").addEventListener("click", addRecipe);
+
 displayRecipes();
