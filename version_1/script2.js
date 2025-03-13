@@ -32,13 +32,42 @@ const displayRecipes = () => {
         recipeList.appendChild(recipeCard);
     })
 }
+const showError = (elementId, message) => {
+    const errorElement = document.getElementById(elementId)
+    errorElement.innerText = message ;
+    errorElement.classList.remove("hidden");
+}
+const hideError = (elementId) => {
+    const errorElement = document.getElementById(elementId);
+    errorElement.classList.add("hidden");
+}
 const addRecipe = (event) => {
     event.preventDefault();
-    const recipeTitle = document.getElementById("recipeTitle").value;
-    const recipeIngredients = document.getElementById("recipeIngredients").value;
-    const recipeSteps = document.getElementById("recipeSteps").value;
+    const recipeTitle = document.getElementById("recipeTitle").value.trim();
+    const recipeIngredients = document.getElementById("recipeIngredients").value.trim();
+    const recipeSteps = document.getElementById("recipeSteps").value.trim();
 
-    if(recipeTitle.trim() !== "" && recipeIngredients.trim() !== "" && recipeSteps.trim() !== ""){
+    // if(recipeTitle.trim() !== "" && recipeIngredients.trim() !== "" && recipeSteps.trim() !== ""){
+
+    hideError("titleError");
+    hideError("ingredientsError");
+    hideError("stepsError");
+
+    let isValid = true;
+
+    if(recipeTitle === ""){
+        showError("titleError", "Please enter the Recipe title!!");
+        isValid = false;
+    }
+    if(recipeIngredients === ""){
+        showError("ingredientsError", "Please enter the Recipe ingredients!!");
+        isValid = false;
+    }
+    if(recipeSteps === ""){
+        showError("stepsError", "Please enter the Recipe steps!!");
+        isValid = false;
+        }
+if(isValid){
 const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === recipeTitle.toLowerCase());
  if(isDuplicate){
     alert('The recipe already exist!!!')
@@ -47,7 +76,7 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
         title: recipeTitle,
         ingredients: recipeIngredients,
         steps: recipeSteps
-    }
+    }}
     recipes.push(newRecipe)
     
     document.getElementById("recipeTitle").value= "";
@@ -56,9 +85,10 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
     document.getElementById("recipeSteps").value= "";
     displayRecipes();  
  }
-    }else{
-        alert('Please fill all the fields')
-    }
+    // }
+    // else{
+    //     alert('Please fill all the fields')
+    // }
 
 }
 document.getElementById('recipeForm').addEventListener('submit', addRecipe);
