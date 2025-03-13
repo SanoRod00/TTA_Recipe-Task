@@ -3,6 +3,10 @@ let recipes = [];
 
 const displayRecipes = () => {
     const recipeList = document.querySelector('#recipeList')
+    
+
+
+if(recipeList){
     recipeList.innerHTML = "";
     recipes.forEach((recipe, index) => {
         const recipeCard = document.createElement('div');
@@ -15,9 +19,9 @@ const displayRecipes = () => {
          <button class = "bg-red-500 text-white px-2 py-1 rounded mt-2" onClick = "deleteRecipe(${index})">Delete</button>
         `;
         recipeList.appendChild(recipeCard);
-    })
+    } )
 }
-
+}
 const saveRecipeToLocalStorage = () => {
     localStorage.setItem("recipes", JSON.stringify(recipes));
 }
@@ -32,8 +36,11 @@ const loadRecipesFromLocalStorage = () => {
 
 const showError = (elementId, message) => {
     const errorElement = document.getElementById(elementId)
-    errorElement.innerText = message ;
+    if(errorElement){
+        errorElement.innerText = message ;
     errorElement.classList.remove("hidden");
+    }
+    
 }
 const hideError = (elementId) => {
     const errorElement = document.getElementById(elementId);
@@ -45,7 +52,7 @@ const addRecipe = (event) => {
     const recipeIngredients = document.getElementById("recipeIngredients").value.trim();
     const recipeSteps = document.getElementById("recipeSteps").value.trim();
 
-   
+    
     hideError("titleError");
     hideError("ingredientsError");
     hideError("stepsError");
@@ -65,8 +72,10 @@ const addRecipe = (event) => {
         isValid = false;
         }
 if(isValid){
+
 const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === recipeTitle.toLowerCase());
- if(isDuplicate){
+
+if(isDuplicate){
     alert('The recipe already exist!!!')
  }else{
     const newRecipe = {
@@ -82,9 +91,11 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
     document.getElementById("recipeSteps").value= "";
 
     saveRecipeToLocalStorage();
+    if (document.querySelector('#recipeList')){  
     displayRecipes();  
+    }
   }  
- }    
+ }      
 }  
 const editRecipe = (index) => {
 
@@ -98,15 +109,24 @@ const editRecipe = (index) => {
         recipes[index].steps = updatedRecipeSteps;
 
         saveRecipeToLocalStorage();
+        if (document.querySelector('#recipeList')){  
         displayRecipes();
-    }
+         }
+    }                                                                                                                                                                                                                           
 }
 const deleteRecipe = (index) => {
     recipes.splice(index, 1);
     saveRecipeToLocalStorage();
+    if (document.querySelector('#recipeList')){   
     displayRecipes();
 }
-document.getElementById('recipeForm').addEventListener('submit', addRecipe);
+}
+
+const recipeForm = document.getElementById("recipeForm")
+
+if(recipeForm){
+    document.getElementById('recipeForm').addEventListener('submit', addRecipe);
+}
 
 loadRecipesFromLocalStorage();
 displayRecipes();
