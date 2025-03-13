@@ -1,25 +1,10 @@
-let recipes = [
-    {
-        title:"Spaghetti Bolognese",
-        ingredients: "Spaghetti, Ground Beef, Tomato Sauce, Parmesan Cheese",
-        steps: "Cook spaghetti, cook ground beef, combine with tomato sauce, top with parmes"
-    },
-    {
-        title:"Chicken Fajitas",
-        ingredients: "Chicken, Bell Peppers, Onions, Tortillas, Salsa",
-        steps: "Cook chicken, cook bell peppers and onions, serve with tortillas and salsa"
-    },
-    {
-        title:"Grilled Cheese Sandwich",
-        ingredients: "Bread, Cheese, Butter",
-        steps: "Butter bread, place cheese in between, grill until cheese is melted"
-    }
-];
+let recipes = [];
+
 
 const displayRecipes = () => {
     const recipeList = document.querySelector('#recipeList')
     recipeList.innerHTML = "";
-    recipes.forEach((recipe) => {
+    recipes.forEach((recipe, index) => {
         const recipeCard = document.createElement('div');
         recipeCard.classList.add("bg-white", "p-4", "rounded", "shadow", "mb-4")
         recipeCard.innerHTML = `
@@ -27,7 +12,7 @@ const displayRecipes = () => {
         <p class = "text-sm text-gray-500"><strong class = "font-bold text-lg">Ingredients: &ensp;</strong>${recipe.ingredients}</p>
          <p class = "text-sm text-gray-500"><strong class = "font-bold text-lg">Steps: &ensp;</strong>${recipe.steps}</p>
          <button class = "bg-green-500 text-white px-2 py-1 rounded mt-2">Edit</button>
-         <button class = "bg-red-500 text-white px-2 py-1 rounded mt-2">Delete</button>
+         <button class = "bg-red-500 text-white px-2 py-1 rounded mt-2" onClick = "deleteRecipe(${index})">Delete</button>
         `;
         recipeList.appendChild(recipeCard);
     })
@@ -60,8 +45,7 @@ const addRecipe = (event) => {
     const recipeIngredients = document.getElementById("recipeIngredients").value.trim();
     const recipeSteps = document.getElementById("recipeSteps").value.trim();
 
-    // if(recipeTitle.trim() !== "" && recipeIngredients.trim() !== "" && recipeSteps.trim() !== ""){
-
+   
     hideError("titleError");
     hideError("ingredientsError");
     hideError("stepsError");
@@ -102,6 +86,12 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
   }  
  }    
 }  
+const deleteRecipe = (index) => {
+    recipes.splice(index, 1);
+    saveRecipeToLocalStorage();
+    displayRecipes();
+}
 document.getElementById('recipeForm').addEventListener('submit', addRecipe);
+
 loadRecipesFromLocalStorage();
 displayRecipes();
