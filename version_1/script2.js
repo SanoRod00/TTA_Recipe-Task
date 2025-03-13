@@ -48,20 +48,39 @@ const addRecipe = (event) => {
     const recipeSteps = document.getElementById("recipeSteps").value;
 
     if(recipeTitle.trim() !== "" && recipeIngredients.trim() !== "" && recipeSteps.trim() !== ""){
+const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === recipeTitle.toLowerCase());
+ if(isDuplicate){
+    alert('The recipe already exist!!!')
+ }else{
+    const newRecipe = {
+        title: recipeTitle,
+        ingredients: recipeIngredients,
+        steps: recipeSteps
+    }
+    recipes.push(newRecipe)
+    
+    document.getElementById("recipeTitle").value= "";
+    
+    document.getElementById("recipeIngredients").value= "";
+    document.getElementById("recipeSteps").value= "";
+    
+    displayRecipes();
+    
+ }
 
-const newRecipe = {
-    title: recipeTitle,
-    ingredients: recipeIngredients,
-    steps: recipeSteps
-}
-recipes.push(newRecipe)
+// const newRecipe = {
+//     title: recipeTitle,
+//     ingredients: recipeIngredients,
+//     steps: recipeSteps
+// }
+// recipes.push(newRecipe)
 
-document.getElementById("recipeTitle").value= "";
+// document.getElementById("recipeTitle").value= "";
 
-document.getElementById("recipeIngredients").value= "";
-document.getElementById("recipeSteps").value= "";
+// document.getElementById("recipeIngredients").value= "";
+// document.getElementById("recipeSteps").value= "";
 
-displayRecipes();
+// displayRecipes();
 
     }else{
         alert('Please fill all the fields')
