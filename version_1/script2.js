@@ -14,22 +14,11 @@ const recipes = [
         ingredients: "Bread, Cheese, Butter",
         steps: "Butter bread, place cheese in between, grill until cheese is melted"
     }
-    
-    // {
-    //     title:"Fried Rice",
-    //     ingredients: "Cooked Rice, Scrambled Eggs, Vegetables, Soy Sauce",
-    //     steps: "Cook scrambled eggs, add vegetables and soy sauce, combine with cooked rice"
-    //     },
-        
-
-
 ];
 
 const displayRecipes = () => {
     const recipeList = document.querySelector('#recipeList')
     recipeList.innerHTML = "";
-    // recipeList.textContent = "Hello terminal"
-
     recipes.forEach((recipe) => {
         const recipeCard = document.createElement('div');
         recipeCard.classList.add("bg-white", "p-4", "rounded", "shadow", "mb-4")
@@ -37,6 +26,8 @@ const displayRecipes = () => {
         <h2 class = "text-lg font-bold">${recipe.title}</h2>
         <p class = "text-sm text-gray-500"><strong class = "font-bold text-lg">Ingredients: &ensp;</strong>${recipe.ingredients}</p>
          <p class = "text-sm text-gray-500"><strong class = "font-bold text-lg">Steps: &ensp;</strong>${recipe.steps}</p>
+         <button class = "bg-green-500 text-white px-2 py-1 rounded mt-2">Edit</button>
+         <button class = "bg-red-500 text-white px-2 py-1 rounded mt-2">Delete</button>
         `;
         recipeList.appendChild(recipeCard);
     })
@@ -63,33 +54,13 @@ const isDuplicate = recipes.some((recipe) => recipe.title.toLowerCase() === reci
     
     document.getElementById("recipeIngredients").value= "";
     document.getElementById("recipeSteps").value= "";
-    
-    displayRecipes();
-    
+    displayRecipes();  
  }
-
-// const newRecipe = {
-//     title: recipeTitle,
-//     ingredients: recipeIngredients,
-//     steps: recipeSteps
-// }
-// recipes.push(newRecipe)
-
-// document.getElementById("recipeTitle").value= "";
-
-// document.getElementById("recipeIngredients").value= "";
-// document.getElementById("recipeSteps").value= "";
-
-// displayRecipes();
-
     }else{
         alert('Please fill all the fields')
     }
 
 }
-
-// const recipeForm = document.getElementById('recipeForm');
-// recipeForm.addEventListener('submit', addRecipe)
 document.getElementById('recipeForm').addEventListener('submit', addRecipe);
 
 
