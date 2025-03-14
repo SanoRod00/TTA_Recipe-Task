@@ -129,6 +129,23 @@ const editRecipe = (index) => {
     
 }
 
+const saveRecipe = (index) => {
+    const updatedRecipeTitle = document.getElementById(`titleInput-${index}`).value.trim();
+    const updatedRecipeIngredients = document.getElementById(`ingredientsInput-${index}`).value.trim();
+    const updatedRecipeSteps = document.getElementById(`stepsInput-${index}`).value.trim();
+
+
+    if(updatedRecipeTitle && updatedRecipeIngredients && updatedRecipeSteps){
+        recipes[index].title = updatedRecipeTitle;
+        recipes[index].ingredients = updatedRecipeIngredients;
+        recipes[index].steps = updatedRecipeSteps;
+        saveRecipeToLocalStorage();  
+        displayRecipes();
+        
+}else{
+    alert('Please edit any field');
+}
+}
 const cancelEdit = (index) => {
     document.getElementById(`titleDisplay-${index}`).classList.remove("hidden");
     document.getElementById(`ingredientsDisplay-${index}`).classList.remove("hidden");
