@@ -1,5 +1,5 @@
 let recipes = [];
-
+let oldRecipes =[];
 
 const displayRecipes = () => {
     const recipeList = document.querySelector('#recipeList')
@@ -37,10 +37,16 @@ if(recipeList){
 }
 const saveRecipeToLocalStorage = () => {
     localStorage.setItem("recipes", JSON.stringify(recipes));
+    localStorage.setItem("oldRecipes", JSON.stringify(oldRecipes))
 }
 
 const loadRecipesFromLocalStorage = () => {
-    const storedRecipes = localStorage.getItem("recipes")
+    const storedRecipes = localStorage.getItem("recipes");
+    const storedOldRecipes = localStorage.getItem("oldRecipes");
+
+    if(storedOldRecipes){
+        oldRecipes = JSON.parse(storedOldRecipes)
+    }
     
     if(storedRecipes){
         recipes = JSON.parse(storedRecipes);
@@ -164,7 +170,8 @@ const cancelEdit = (index) => {
 }
 
 const deleteRecipe = (index) => {
-    recipes.splice(index, 1);
+   const deletedRecipe = recipes.splice(index, 1);
+   oldRecipes.push(deletedRecipe);
     saveRecipeToLocalStorage();
     if (document.querySelector('#recipeList')){   
     displayRecipes();
